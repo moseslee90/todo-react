@@ -1,8 +1,7 @@
-class List extends React.Component {
+class App extends React.Component {
     constructor() {
         super();
     }
-
     state = {
         list: [],
         word: ""
@@ -30,13 +29,29 @@ class List extends React.Component {
     };
 
     render() {
+        return (
+            <List
+                changeHandler={this.changeHandler}
+                clickHandler={this.clickHandler}
+                list={this.state.list}
+                word={this.state.word}
+            />
+        );
+    }
+}
+
+class List extends React.Component {
+    render() {
         // render the list with a map() here
-        let listItems = this.state.list;
+        let listItems = this.props.list;
         console.log("rendering");
         return (
             <div className="list">
-                <input onChange={this.changeHandler} value={this.state.word} />
-                <button onClick={this.clickHandler}>add item</button>
+                <input
+                    onChange={this.props.changeHandler}
+                    value={this.props.word}
+                />
+                <button onClick={this.props.clickHandler}>add item</button>
                 <ul>{listItems}</ul>
             </div>
         );
@@ -50,4 +65,4 @@ class ListItem extends React.Component {
     }
 }
 
-ReactDOM.render(<List />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));

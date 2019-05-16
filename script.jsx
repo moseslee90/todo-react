@@ -30,12 +30,13 @@ class App extends React.Component {
 
     render() {
         return (
-            <List
-                changeHandler={this.changeHandler}
-                clickHandler={this.clickHandler}
-                list={this.state.list}
-                word={this.state.word}
-            />
+            <div>
+                <List
+                    changeHandler={this.changeHandler}
+                    clickHandler={this.clickHandler}
+                />
+                <ItemList list={this.state.list} />
+            </div>
         );
     }
 }
@@ -43,18 +44,20 @@ class App extends React.Component {
 class List extends React.Component {
     render() {
         // render the list with a map() here
-        let listItems = this.props.list;
         console.log("rendering");
         return (
             <div className="list">
-                <input
-                    onChange={this.props.changeHandler}
-                    value={this.props.word}
-                />
+                <input onChange={this.props.changeHandler} />
                 <button onClick={this.props.clickHandler}>add item</button>
-                <ul>{listItems}</ul>
             </div>
         );
+    }
+}
+
+class ItemList extends React.Component {
+    render() {
+        let listItems = this.props.list;
+        return <ul>{listItems}</ul>;
     }
 }
 
